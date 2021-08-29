@@ -1,0 +1,10 @@
+com/myapp/kafka/constants/IKafkaConstants.java
+ com.myapp.kafka.constants.IKafkaConstants
+com/myapp/kafka/partitioner/CustomPartitioner.java
+ com.myapp.kafka.partitioner.CustomPartitioner
+com/myapp/kafka/deserializer/WeatherDataDeserializer.java
+ com.myapp.kafka.deserializer.WeatherDataDeserializer
+com/myapp/kafka/WeatherDataProducerApp.java
+ com.myapp.kafka.WeatherDataProducerApp
+com/myapp/kafka/model/WeatherData.java
+ com.myapp.kafka.model.WeatherData
