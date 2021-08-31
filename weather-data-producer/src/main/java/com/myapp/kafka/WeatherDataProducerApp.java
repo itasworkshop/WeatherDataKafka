@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.Future;
 
 public class WeatherDataProducerApp {
 
@@ -28,7 +29,7 @@ public class WeatherDataProducerApp {
         ObjectMapper objectMapper = new ObjectMapper();
         //objectMapper.registerModule(module);
 
-        File myfile = new File("/home/praveen/IdeaProjects/weather-data-producer/src/main/resources/small.json");
+        File myfile = new File("/home/praveen/IdeaProjects/weather-data-producer/src/main/resources/weather.json");
 
         List<WeatherData> WeatherDataList = Arrays.asList(objectMapper.readValue(myfile, WeatherData[].class));
         WeatherDataList.forEach(System.out::println);
@@ -37,14 +38,11 @@ public class WeatherDataProducerApp {
         for (WeatherData r : WeatherDataList) {
             System.out.println("Current data being read is " + r);
             JsonNode jsonNode = objectMapper.valueToTree(r);
-            final ProducerRecord<String, JsonNode> record = new ProducerRecord<String, JsonNode>(topicName, jsonNode);
+            ProducerRecord<String, JsonNode> record = new ProducerRecord<String, JsonNode>(topicName, jsonNode);
             System.out.println("Current record is " + record);
-            try {
-                producer.send(record);
-            } catch (Exception e) {
-                System.out.println("Error in sending record");
-                System.out.println(e);
-            }
+            producer.send(record);
+            //Future<RecordMetadata> ft = producer.send(record);
+            //System.out.println(ft.get());
         }
     }
 }
